@@ -1,1 +1,1 @@
-Hotol: 1
+Hotel: Room
