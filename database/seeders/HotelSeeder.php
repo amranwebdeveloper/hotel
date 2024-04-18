@@ -530,33 +530,7 @@ class HotelSeeder extends Seeder
                     'created_at' =>  date("Y-m-d H:i:s"),
                 ]);
         }
-
-        $attr = new Attributes([
-            'name'=>'Room Amenities',
-            'service'=>'hotel_room'
-        ]);
-        $attr->save();
-        $term_ids = [];
-        $icons = ['icofont-wall-clock','icofont-imac','icofont-recycle-alt','icofont-wifi-alt','icofont-tea'];
-        foreach (['Wake-up call','Flat Tv','Laundry and dry cleaning','Internet – Wifi','Coffee and tea'] as $key=>$term){
-            $term = new Terms([
-                'name'=>$term,
-                'attr_id'=>$attr->id,
-                'icon'=>$icons[$key]
-            ]);
-            $term->save();
-            $term_ids[] = $term->id;
-        }
-        foreach ($IDs_room as $room_id){
-            foreach ($term_ids as $k=>$term_id) {
-                if( rand(0 , count($term_ids) ) == $k) continue;
-                HotelRoomTerm::firstOrCreate([
-                    'term_id' => $term_id,
-                    'target_id' => $room_id
-                ]);
-            }
-        }
-
+ 
         // Settings
         DB::table('core_settings')->insert(
             [
